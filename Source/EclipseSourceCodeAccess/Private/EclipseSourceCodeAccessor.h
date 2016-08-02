@@ -66,6 +66,11 @@ public:
 	virtual void Tick(const float DeltaTime) override;
 
 	/**
+	* Refresh availability of compilers.
+	*/
+	virtual void RefreshAvailability() override;
+
+	/**
 	 * Initialize the accessor.
 	 */
 	void Startup();

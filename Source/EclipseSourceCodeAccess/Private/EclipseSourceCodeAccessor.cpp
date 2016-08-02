@@ -130,6 +130,12 @@ FString FEclipseSourceCodeAccessor::GetSolutionPath() const
 	return CachedSolutionPath;
 }
 
+void RefreshAvailability()
+{
+	// Just a stub
+	UE_LOG(LogEclipseAccessor, Warning, TEXT("FIXME: Function stub FEclipseSourceCodeAccessor::RefreshAvailability") );
+}
+
 void FEclipseSourceCodeAccessor::Startup()
 {
 	// Cache this so we don't have to do it on a background thread
