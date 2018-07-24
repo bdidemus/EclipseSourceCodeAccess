@@ -2,7 +2,7 @@ namespace UnrealBuildTool.Rules
 {
 	public class EclipseSourceCodeAccess : ModuleRules
 	{
-		public EclipseSourceCodeAccess(TargetInfo Target)
+		public EclipseSourceCodeAccess(ReadOnlyTargetRules Target) : base(Target)
 		{
 			PrivateDependencyModuleNames.AddRange(
 				new string[]
@@ -13,7 +13,7 @@ namespace UnrealBuildTool.Rules
 				}
 			);
 
-			if (UEBuildConfiguration.bBuildEditor)
+			if (Target.bBuildEditor)
 			{
 				PrivateDependencyModuleNames.Add("HotReload");
 			}

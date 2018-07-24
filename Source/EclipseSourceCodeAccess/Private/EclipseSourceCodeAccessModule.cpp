@@ -1,6 +1,6 @@
+#include "EclipseSourceCodeAccessModule.h"
 #include "EclipseSourceCodeAccessPrivatePCH.h"
 #include "Runtime/Core/Public/Features/IModularFeatures.h"
-#include "EclipseSourceCodeAccessModule.h"
 
 IMPLEMENT_MODULE(FEclipseSourceCodeAccessModule, EclipseSourceCodeAccess);
 

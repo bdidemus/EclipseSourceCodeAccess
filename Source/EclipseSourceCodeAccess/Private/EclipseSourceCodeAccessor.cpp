@@ -1,6 +1,6 @@
-#include "EclipseSourceCodeAccessPrivatePCH.h"
 #include "EclipseSourceCodeAccessor.h"
-#include "ModuleManager.h"
+#include "EclipseSourceCodeAccessPrivatePCH.h"
+#include "Modules/ModuleManager.h"
 #include "DesktopPlatformModule.h"
 
 #if WITH_EDITOR
@@ -47,6 +47,36 @@ bool FEclipseSourceCodeAccessor::OpenSolution()
 	UE_LOG(LogEclipseAccessor, Warning, TEXT("FEclipseSourceCodeAccessor::OpenSolution: %s %s"), *EclipsePath, *Solution);
 
 	FProcHandle Proc = FPlatformProcess::CreateProc(*EclipsePath, *Solution, true, false, false, nullptr, 0, nullptr, nullptr);
+	if (Proc.IsValid())
+	{
+		FPlatformProcess::CloseProc(Proc);
+		return true;
+	}
+	return false;
+}
+
+bool FEclipseSourceCodeAccessor::DoesSolutionExist() const
+{
+	if (IsInGameThread())
+	{
+		FString SolutionPath;
+		return FDesktopPlatformModule::Get()->GetSolutionPath(SolutionPath);
+	}
+	return false;
+}
+
+
+bool FEclipseSourceCodeAccessor::OpenSolutionAtPath(const FString& InSolutionPath)
+{
+	FString EclipsePath;
+	if (!CanRunEclipse(EclipsePath))
+	{
+		return false;
+	}
+
+	UE_LOG(LogEclipseAccessor, Warning, TEXT("FEclipseSourceCodeAccessor::OpenSolution: %s %s"), *EclipsePath, *InSolutionPath);
+
+	FProcHandle Proc = FPlatformProcess::CreateProc(*EclipsePath, *InSolutionPath, true, false, false, nullptr, 0, nullptr, nullptr);
 	if (Proc.IsValid())
 	{
 		FPlatformProcess::CloseProc(Proc);

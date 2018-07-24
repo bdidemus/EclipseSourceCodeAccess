@@ -34,10 +34,17 @@ public:
 	 */
 	virtual FText GetDescriptionText() const override;
 
+	virtual bool DoesSolutionExist() const override;
+
 	/**
 	 * Open the CodeLite Workspace for editing.
 	 */
 	virtual bool OpenSolution() override;
+
+	/**
+	 * Open the CodeLite Workspace for editing.
+	 */
+	virtual bool OpenSolutionAtPath(const FString& InSolutionPath) override;
 
 	/**
 	 * Open a file at a specific line and optional column.
